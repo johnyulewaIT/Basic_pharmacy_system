@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 06, 2023 at 03:23 PM
+-- Generation Time: Jan 20, 2024 at 03:08 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -182,7 +182,7 @@ CREATE TABLE `info` (
 --
 
 INSERT INTO `info` (`id`, `name`, `address`, `phone_no`, `email`, `opening_date`, `closing_balance`, `opening_balance`) VALUES
-(7, 'Night Pharmacy', 'PO Box 888-10100', '+254700361894', 'natonmwangi@gmail.com', '2023-06-01', '2024-06-01', '100000');
+(7, 'IT SKILLS ACADEMY', '880 Kenya', '07 00 000 00 ', 'johnDoe@gmail', '2024-01-01', '2025-01-01', '10000000');
 
 -- --------------------------------------------------------
 
@@ -206,21 +206,20 @@ CREATE TABLE `inventory` (
 --
 
 CREATE TABLE `invoice_pay` (
-  `id` int(10) NOT NULL,
-  `purchase_no` varchar(100) NOT NULL,
-  `total` varchar(100) NOT NULL,
+  `id` int(10) DEFAULT NULL,
+  `price` varchar(200) NOT NULL,
+  `total` varchar(200) NOT NULL,
   `date` date NOT NULL,
-  `qty` varchar(100) NOT NULL,
-  `price` varchar(100) NOT NULL
+  `purchase_no` varchar(200) NOT NULL,
+  `qty` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `invoice_pay`
 --
 
-INSERT INTO `invoice_pay` (`id`, `purchase_no`, `total`, `date`, `qty`, `price`) VALUES
-(1, 'Purchase No-  53020', '30', '2023-08-06', '2', '15'),
-(2, 'Pn38300922', '20', '2023-08-06', '2', '10');
+INSERT INTO `invoice_pay` (`id`, `price`, `total`, `date`, `purchase_no`, `qty`) VALUES
+(NULL, '500', '5000', '2024-01-20', 'Pn2342232', '10');
 
 -- --------------------------------------------------------
 
@@ -296,8 +295,7 @@ INSERT INTO `patients` (`id`, `patient_no`, `patient_name`, `location`, `dob`, `
 (55, 'Invoice No-  242222', 'John Doe', 'Kenya', '2021-06-02', '0', '', ''),
 (56, 'Invoice No-  372057', 'Sample Patient 2', 'Kenya', '2021-06-23', '1', '', ''),
 (57, 'Invoice No-  2802732', 'jane doe', 'Kenya', '2021-05-31', '0', '', ''),
-(58, 'Invoice No-  2230202', 'Suprime C', 'Nyeri', '2023-04-02', '0', '', ''),
-(59, 'Invoice No-  3462096', 'Suprime', 'Nyeri', '2022-06-14', '0', '', '');
+(58, 'Invoice No-  2230202', 'Suprime C', 'Nyeri', '2023-04-02', '0', '', '');
 
 -- --------------------------------------------------------
 
@@ -331,11 +329,11 @@ INSERT INTO `pharmacy_stock` (`id`, `medicine_name`, `pharmacy_Qty`, `expiry_dat
 (1, 'Brufen', '0', '2023-06-15', '', '', '30', '10', 'tablet', '', '', '', '', '', 0),
 (2, 'Piliton', '21', '2023-06-15', '', '', '30', '50mg', 'tablet', '', '', '', '', '', 0),
 (3, 'Cetrizin', '2', '0000-00-00', '', '', '25', '50mg', 'tablet', '', '', '', '', '', 0),
-(4, 'Jadell', '1', '2023-10-17', '', '', '500', '60mg', 'tablet', '', '', '', '', '', 0),
-(5, 'Piliton', '48', '2023-10-18', '', '', '', '60ml', 'Tablet', '', 'Yes', '10', '100', '100', 50),
-(6, 'Paracetamal', '0', '2027-02-27', '', '', '10', '50mg', 'Tablet', '', '', '', '', '', 0),
-(7, 'ABZ', '0', '2023-06-20', '', '', '10', '60mg', 'Tablet', '', '', '', '', '', 0),
-(9, 'Panadol', '0', '2021-06-01', '', '', '20', '60mg', 'Tablet', '', '', '', '', '', 0);
+(4, 'Jadell', '1', '2024-03-14', '', '', '500', '60mg', 'tablet', '', '', '', '', '', 0),
+(5, 'Piliton', '54', '2023-10-18', '', '', '', '60ml', 'Tablet', '', 'Yes', '10', '100', '100', 50),
+(6, 'Paracetamal', '0', '2027-02-27', '', '', '100', '50mg', 'Tablet', '', '', '', '', '', 0),
+(7, 'ABZ', '0', '2023-06-20', '', '', '20', '60mg', 'Tablet', '', '', '', '', '', 0),
+(9, 'Panadol', '0', '2021-06-01', '', '', '15', '60mg', 'Tablet', '', '', '', '', '', 0);
 
 -- --------------------------------------------------------
 
@@ -360,8 +358,7 @@ INSERT INTO `pharmacy_stock_items` (`id`, `item_name`, `capacity`, `price`, `exp
 (4, 'Catheter', '', '', '2021-05-26 17:14:07.607543'),
 (5, 'test', '', '', '2021-05-29 18:03:42.684105'),
 (6, '', '', '', '2021-05-29 18:06:06.156792'),
-(7, 'podi', '', '', '2021-05-29 18:28:48.730678'),
-(8, 'none', '', '', '2023-08-06 12:46:32.514373');
+(7, 'podi', '', '', '2021-05-29 18:28:48.730678');
 
 -- --------------------------------------------------------
 
@@ -377,7 +374,7 @@ CREATE TABLE `purchase_order` (
   `supplier` varchar(244) NOT NULL,
   `status` varchar(10) NOT NULL DEFAULT '0',
   `purchase_no` varchar(255) NOT NULL,
-  `total` varchar(100) NOT NULL
+  `total` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -385,8 +382,9 @@ CREATE TABLE `purchase_order` (
 --
 
 INSERT INTO `purchase_order` (`purchase_id`, `medicine_name`, `price`, `qty`, `supplier`, `status`, `purchase_no`, `total`) VALUES
-(3, 'Panadol', '15', '2', 'supplier', '1', 'Purchase No-  53020', ''),
-(9, 'ABZ', '10', '2', 'jane', '1', 'Pn38300922', '20');
+(3, 'Panadol', '15', '2', 'supplier', '0', 'Purchase No-  53020', ''),
+(4, 'Jadell', '500', '10', 'jane solutions', '1', 'Pn2342232', '5000'),
+(5, 'Panadol', '15', '500', 'jane solutions', '0', 'Pn20327', '7500');
 
 -- --------------------------------------------------------
 
@@ -560,11 +558,7 @@ INSERT INTO `sales_order` (`transaction_id`, `invoice`, `medicine_name`, `qty`, 
 (167, 'Invoice No-  242222', 'Piliton ', '1', '50', '50', 'John Doe', '0', '2021-06-30', '0', '55', '2'),
 (168, 'Invoice No-  372057', 'Piliton ', '2', '100', '50', 'Sample Patient 2', '0', '2021-06-30', '1', '56', '2'),
 (169, 'Invoice No-  372057', 'Piliton ', '1', '100', '100', 'Sample Patient 2', '0', '2021-06-30', '1', '56', '5'),
-(170, 'Invoice No-  2230202', 'Piliton ', '3', '150', '100', 'Suprime C', '0', '2023-06-18', '0', '58', '5'),
-(171, 'Invoice No-  3462096', 'Piliton ', '2', '100', '100', 'Suprime', '0', '2023-06-20', '0', '59', '5'),
-(172, 'Invoice No-  3462096', 'Piliton ', '2', '100', '100', 'Suprime', '0', '2023-06-20', '0', '59', '5'),
-(173, 'Invoice No-  3462096', 'Piliton ', '1', '50', '100', 'Suprime', '0', '2023-06-20', '0', '59', '5'),
-(174, 'Invoice No-  3462096', 'Piliton ', '1', '50', '100', 'Suprime', '0', '2023-06-20', '0', '59', '5');
+(170, 'Invoice No-  2230202', 'Piliton ', '3', '150', '100', 'Suprime C', '0', '2023-06-18', '0', '58', '5');
 
 -- --------------------------------------------------------
 
@@ -643,9 +637,11 @@ CREATE TABLE `store` (
 --
 
 INSERT INTO `store` (`id`, `medicine_name`, `date_received`, `Qty`, `expiry_date`, `amount`, `stock_out`, `price`, `capacity`, `type`, `dosage_sold`, `dosage`, `price_dosage`, `app`, `half_dosage_price`, `confirm`) VALUES
-(6, 'Paracetamal', '0000-00-00', '35', '2027-02-27', '', '0', '15', '50mg', 'Tablet', '', '', '0', '', 0, '0'),
-(7, 'ABZ', '0000-00-00', '16', '2023-06-20', '', '0', '15', '60mg', 'Tablet', '', '', '', '', 0, '0'),
-(9, 'Panadol', '0000-00-00', '0', '2021-06-01', '', '0', '15', '60mg', 'Tablet', '', '', '', '', 0, '1');
+(4, 'Jadell', '0000-00-00', '57', '2024-03-14', '', '0', '550', '60mg', 'tablet', '', '', '', '', 0, '0'),
+(5, 'Piliton', '0000-00-00', '100', '2023-10-18', '', '0', '', '60ml', 'Tablet', 'Yes', '10', '100', '100', 50, '0'),
+(6, 'Paracetamal', '0000-00-00', '15', '2027-02-27', '', '0', '10', '50mg', 'Tablet', '', '', '0', '', 0, '0'),
+(7, 'ABZ', '0000-00-00', '14', '2023-06-20', '', '0', '10', '60mg', 'Tablet', '', '', '', '', 0, '0'),
+(9, 'Panadol', '0000-00-00', '500', '2021-06-01', '', '0', '20', '60mg', 'Tablet', '', '', '', '', 0, '1');
 
 -- --------------------------------------------------------
 
@@ -656,7 +652,7 @@ INSERT INTO `store` (`id`, `medicine_name`, `date_received`, `Qty`, `expiry_date
 CREATE TABLE `store_items` (
   `id` int(200) NOT NULL,
   `item_name` varchar(255) NOT NULL,
-  `capacity` int(255) NOT NULL,
+  `capacity` varchar(255) NOT NULL,
   `price` varchar(255) NOT NULL,
   `expiry_date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
@@ -666,9 +662,8 @@ CREATE TABLE `store_items` (
 --
 
 INSERT INTO `store_items` (`id`, `item_name`, `capacity`, `price`, `expiry_date`) VALUES
-(3, 'needles', 20, '150', '2026-10-31'),
-(4, 'Catheters', 56, '200', '2023-11-30'),
-(8, 'Updated', 24, '40', '2023-08-06');
+(3, 'needles', '20', '150', '2026-10-31'),
+(4, 'Catheter', '23', '200', '2023-11-30');
 
 -- --------------------------------------------------------
 
@@ -678,7 +673,7 @@ INSERT INTO `store_items` (`id`, `item_name`, `capacity`, `price`, `expiry_date`
 
 CREATE TABLE `suppliers` (
   `id` int(10) NOT NULL,
-  `supplier_name` varchar(30) NOT NULL
+  `supplier_name` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -686,7 +681,7 @@ CREATE TABLE `suppliers` (
 --
 
 INSERT INTO `suppliers` (`id`, `supplier_name`) VALUES
-(1, 'jane');
+(1, 'jane solutions');
 
 -- --------------------------------------------------------
 
@@ -711,9 +706,7 @@ INSERT INTO `users` (`id`, `username`, `password`) VALUES
 (6, 'lab', 'lab'),
 (12, 'John', '$2y$10$cx1jRJqjdXPjvuZvbyEcyO125zYri1iRa1waZAoQxKSicp4tMw1tO'),
 (13, 'james', '$2y$10$Bb7KlN.eLjecx2BFR6iADu391bC3DI6yzsWPlXjmhavSYdMfL6nti'),
-(14, 'doe', '$2y$10$3zA9FkSnvmDRaHV6r587QObs.bwuemOy4xLgLONMepO7TizauhnH6'),
-(15, 'user', '$2y$10$p3fQmbq8gNc0QzIfZe4JqOxj6DEPmpfevZNzZrQK3izJcXtvQmHa2'),
-(16, 'natonmwangi@gmail.com', '$2y$10$tEcjOdIOzmDXEG11CZnk/eGX3aFPIeIAofkeWpWHyeoP8M0EysmaC');
+(14, 'ADMIN', '$2y$10$3CMbJlViMPvVwdF20iOGn.Xl13ijKFgpJnJXYB0mtEK5osM.evBZ2');
 
 -- --------------------------------------------------------
 
@@ -787,12 +780,6 @@ ALTER TABLE `info`
 -- Indexes for table `inventory`
 --
 ALTER TABLE `inventory`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `invoice_pay`
---
-ALTER TABLE `invoice_pay`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -944,12 +931,6 @@ ALTER TABLE `inventory`
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `invoice_pay`
---
-ALTER TABLE `invoice_pay`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
 -- AUTO_INCREMENT for table `laboratory_tests`
 --
 ALTER TABLE `laboratory_tests`
@@ -971,7 +952,7 @@ ALTER TABLE `lab_test`
 -- AUTO_INCREMENT for table `patients`
 --
 ALTER TABLE `patients`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT for table `pharmacy_stock`
@@ -983,13 +964,13 @@ ALTER TABLE `pharmacy_stock`
 -- AUTO_INCREMENT for table `pharmacy_stock_items`
 --
 ALTER TABLE `pharmacy_stock_items`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `purchase_order`
 --
 ALTER TABLE `purchase_order`
-  MODIFY `purchase_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `purchase_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `sales`
@@ -1001,7 +982,7 @@ ALTER TABLE `sales`
 -- AUTO_INCREMENT for table `sales_order`
 --
 ALTER TABLE `sales_order`
-  MODIFY `transaction_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=175;
+  MODIFY `transaction_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=171;
 
 --
 -- AUTO_INCREMENT for table `services`
@@ -1025,7 +1006,7 @@ ALTER TABLE `store`
 -- AUTO_INCREMENT for table `store_items`
 --
 ALTER TABLE `store_items`
-  MODIFY `id` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `suppliers`
@@ -1037,7 +1018,7 @@ ALTER TABLE `suppliers`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `wards`
